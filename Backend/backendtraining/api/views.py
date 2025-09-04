@@ -1,14 +1,19 @@
-from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework import viewsets
 from rest_framework.response import Response
+from rest_framework.decorators import action
+from django.http import FileResponse
+from .models import UploadedFile
+from .serializers import UploadedFileSerializer
 
-# Create your views here.
-@api_view(['GET'])
-def show_people(request):
-    data={"message":"Hello I am kesavan"}
-    return Response(data)
+class UploadedFileViewSet(viewsets.ModelViewSet):
+    queryset = UploadedFile.objects.all()
+    serializer_class = UploadedFileSerializer
 
-@api_view(['GET'])
-def show_person(request):
-    data={'message':"Kesava"}
-    return Response(data)
+    # Custom download endpoint
+    @action(detail=True, methods=['get'])
+    def download(self, request, pk=None):
+        file_obj = self.get_object()
+        response = FileResponse(file_obj.file.open('rb'))
+        response['Content-Disposition'] = f'attachment; filename="{file_obj.file.name}"'
+        return response
+

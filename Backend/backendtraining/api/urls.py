@@ -1,6 +1,12 @@
-from django.urls import path
-from .views import show_people
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import UploadedFileViewSet
+
+router = DefaultRouter()
+router.register(r'files', UploadedFileViewSet)
 
 urlpatterns = [
-    path('student/',show_people)
+    path('', include(router.urls)),
 ]
+
+

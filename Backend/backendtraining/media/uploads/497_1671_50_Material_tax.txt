@@ -1,0 +1,3 @@
+[497, 1671, 50, "Material tax 01", 5, "Rate(%)", "Internet", "Monthly Internet Bill", "Package", 197, "N", "N", "Service", "Amount", false]
+
+[497, 1671, 4975, "Material tax 01", 5, "Rate(%)", "raw-material", "cut-fabric", "Kgs", 79212, "N", "N", "Mat", "Amount", false]
